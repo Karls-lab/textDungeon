@@ -8,8 +8,8 @@ import random
 
 class Room():
     def __init__(self):
-        self.name = "here I am"
-        self.items = {}
+        self.name = "name of room"
+        self.items = []
     
     def getName(self):
         return self.name
@@ -24,17 +24,24 @@ class stoneHallway(Room):
         self.fixedItem = random.choice(fixedRoomItems)
         self.fixedItemDescription = random.choice(fixedRoomItemsDescriptions[self.fixedItem])
 
+    def printDescription(self):
+        print(self.baseDescription)
 
-        
+    def printElementalEffects(self):
+        print(self.elementalDescription)
 
-#stoneRoomFaces = {"Stone"}
+    def printFixedItemsInRoom(self):
+        print(self.fixedItemDescription)
+
+
+
 
 stoneRoomFacesDescriptions = ["The stone wall is smooth to the touch",
     "A spider web is caught within your fingers",
     "The hard, stone wall is cold to the touch",
     "The wall of stone bricks lay bare",
     "There's a wall of crudely chisled stone bricks",
-    "here"]
+    ]
 
 elemental = ["Water", "Torch", "Wind"]
 elementalDescription = {
@@ -53,8 +60,8 @@ fixedRoomItemsDescriptions = {
 }
 
 
-newRoom = stoneHallway()
-newRoom.getName
-print(newRoom.baseDescription)
-print(newRoom.elementalDescription)
-print(newRoom.fixedItemDescription)
+# newRoom = stoneHallway()
+# newRoom.getName
+# print(newRoom.baseDescription)
+# print(newRoom.elementalDescription)
+# print(newRoom.fixedItemDescription)

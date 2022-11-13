@@ -1,7 +1,9 @@
+from Rooms import stoneHallway
+
 class ExplorationPhase():
-    def __init__(self, Explorer, Room):
+    def __init__(self, Explorer):
         self.Explorer = Explorer
-        self.Room = Room
+        self.Room = stoneHallway()
 
 
     def examainItem(self):
@@ -10,18 +12,20 @@ class ExplorationPhase():
     def run(self):
         #This is where I will create my combat loop for 
         # encounters based on the list of attackers and defenders
-        Explorer = self.Explorer
-        Room = self.Room
+        explorer = self.Explorer
+        room = self.Room
 
-        hasCombatEnded = False
-        while(not hasCombatEnded):
+        doneExploring = False
+        while(not doneExploring):
             print("--------------------")
-            print("available targets: ")
-            for i in range(len(self.defenders)):
-                defender = self.defenders[i]
-                print(f'[{i}] {defender.name} HP: {defender.stats["HP"]}')
-            targetId = int(input("Which one do you attack?: "))
-            target = self.defenders[targetId]
-            print(target)
-            self.meleeAttack(attacker, target)
+            room.printDescription()
+            room.printElementalEffects()
+            room.printFixedItemsInRoom()
+            # newRoom = stoneHallway()
+            # newRoom.getName
+            # print(newRoom.baseDescription)
+            # print(newRoom.elementalDescription)
+            # print(newRoom.fixedItemDescription)
+
+            doneExploring = True
         

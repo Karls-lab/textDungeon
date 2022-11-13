@@ -5,6 +5,7 @@ class CombatPhase():
 
 
     def meleeAttack(self, attacker, defender):
+        print("--------------------")
         print(attacker.name + " attacked " + defender.name)
         attackModifer = attacker.stats["STR"]
         attackRoll = attacker.attackRoll() + attackModifer
@@ -32,6 +33,5 @@ class CombatPhase():
                 print(f'[{i}] {defender.name} HP: {defender.stats["HP"]}')
             targetId = int(input("Which one do you attack?: "))
             target = self.defenders[targetId]
-            print(target)
             self.meleeAttack(attacker, target)
         
