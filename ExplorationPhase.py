@@ -18,14 +18,18 @@ class ExplorationPhase():
         doneExploring = False
         while(not doneExploring):
             print("--------------------")
-            room.printDescription()
-            room.printElementalEffects()
-            room.printFixedItemsInRoom()
-            # newRoom = stoneHallway()
-            # newRoom.getName
-            # print(newRoom.baseDescription)
-            # print(newRoom.elementalDescription)
-            # print(newRoom.fixedItemDescription)
+            print("You enter the Room")
+            print(f'{room.getDescription()}')
+            print(f'{room.describeElementalEffects()}')
+            print(f'{room.descriptionOfFixedItems()} [{0}]')
+            targetId = 1
+            while(targetId != 0):
+                targetId = int(input("What do you want to investigate? (Select a number) "))
+                print(targetId)
+            print(f'you are investigating feature: {targetId}')
+            searchedItem = room.searchFixedItem()
+            print(f'You found: {searchedItem}')
+            
 
             doneExploring = True
         

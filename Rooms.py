@@ -15,7 +15,8 @@ class Room():
         return self.name
 
 
-
+# Total of 7 stone rooms, when the 7 rooms are done, print something
+# Remove a room description everytime it fires. 
 class stoneHallway(Room):
     def __init__(self):
         self.baseDescription = random.choice(stoneRoomFacesDescriptions)
@@ -23,43 +24,117 @@ class stoneHallway(Room):
         self.elementalDescription = random.choice(elementalDescription[self.elemental])
         self.fixedItem = random.choice(fixedRoomItems)
         self.fixedItemDescription = random.choice(fixedRoomItemsDescriptions[self.fixedItem])
-
-    def printDescription(self):
-        print(self.baseDescription)
-
-    def printElementalEffects(self):
-        print(self.elementalDescription)
-
-    def printFixedItemsInRoom(self):
-        print(self.fixedItemDescription)
+        self.fate = "Nothing"
 
 
+    def getDescription(self):
+        stoneRoomFacesDescriptions.remove(self.baseDescription)
+        return self.baseDescription
+
+    def describeElementalEffects(self):
+        elementalDescription.get(self.elemental).remove(self.elementalDescription)
+        return self.elementalDescription
+
+    def descriptionOfFixedItems(self):
+        return self.fixedItemDescription
+
+    def searchFixedItem(self):
+        self.rollLuck()
+        d = fixedRoomItemInteraction[self.fixedItem]
+        foundThing = random.choice(d[self.fate])
+        return foundThing
+
+    def rollLuck(self):
+        options = ["Good", "Bad", "Nothing"]
+        newFate = random.choice(options)
+        self.fate = newFate
 
 
-stoneRoomFacesDescriptions = ["The stone wall is smooth to the touch",
+# DESCRIPTIONS OF ROOM AND THEIR PROPERTIES AND ITEMS
+# Okay, maybe I can pop the items of the list so the user won't have any repeats during a game...
+
+stoneRoomFacesDescriptions = [
+    "The stone walls are smooth to the touch",
     "A spider web is caught within your fingers",
-    "The hard, stone wall is cold to the touch",
-    "The wall of stone bricks lay bare",
-    "There's a wall of crudely chisled stone bricks",
+    "The hard, stone walls is cold to the touch",
+    "The walls are lined with black drapes",
+    "The room is built and lined with crudely constructed bricks",
+    "Moss and lichen cling to the now slimy walls"
     ]
 
 elemental = ["Water", "Torch", "Wind"]
 elementalDescription = {
-    "Water": ["Water drips from the celing", "You hear the rush of water somewhere beyond this room",
-             "The room is damp"],
-    "Torch": ["flickering of light", "illuminated by "],
-    "Wind": ["A cool, damp breeze rustles your cloths", "You feel a cool stale breeze"]
+    "Water": [
+        "Water drips from the celing",
+        "You hear the rush of water somewhere beyond this room",
+        "The room is damp"
+        ],
+    "Torch": [
+        "flickering of light",
+        "illuminated by "
+        ],
+    "Wind": [
+        "A cool, damp breeze rustles your cloths",
+        "You feel a cool, stale breeze"
+        ]
     }
 
-fixedRoomItems = ["Bookcase", "Alter", "Shrine"]
+fixedRoomItems = [
+    "Bookcase",
+    "Alter",
+    "Shrine",
+    "Chest"
+    ]
+
 fixedRoomItemsDescriptions = {
-    "Bookcase": ["A broken bookcase sags in the corner", "A moldy bookcase houses several slimy books",
-            "An old, dusty bookcase sits upright"],
-    "Alter": ["A blood stained alter", "An alter incribed with mysterious runes"],
-    "Shrine": ["A shrine dedicated to an unknown God", "A broken shrine is decorated with burning incense"]
+    "Bookcase":[
+        "A broken bookcase sags in the corner",
+        "A moldy bookcase sits on the wall that houses several slimy books",
+        "An old, dusty bookcase sits upright to your left"
+        ],
+    "Alter": [
+        "A blood stained alter is in the center of the room",
+        "An alter incribed with mysterious runes is in the center of the room"
+        "You hear faint wispers as you look at the mysterious Hex diagrams on the floor"
+        ],
+    "Shrine": [
+        "A shrine dedicated to an unknown God",
+        "A broken shrine is decorated with burning incense"
+        ],
+    "Chest": [
+        "A sturdy oak chest is sitting next to the wall",
+        "A stone sarcophagus inscribed with ancient runes flanks left side of the room",
+        "You see a dilapidated wooden chest with no lock"
+    ]
 }
 
+fixedRoomItemInteraction = {
+    "Bookcase":{
+        "Good": ["Magic Scroll"],
+        "Nothing": ["Dusty Books"],
+        "Bad": ["Spiders"]
+    },
+    "Alter":{
+        "Good": ["You feel warmth surround you"],
+        "Nothing": ["You don't feel anything"],
+        "Bad": ["You are cursed"]
+    },
+    "Shrine":{
+        "Good": ["You feel blessed"],
+        "Nothing": ["Nothing happens"],
+        "Bad": ["One of the Gods does not think kindly of you"]
+    },
+    "Chest":{
+        "Good": ["Sword", "Gold", "Amulet"],
+        "Nothing": ["Cobwebs", "Maggots", "Mice"],
+        "Bad": ["Mimic", "Arrow Trap"]
+    }
+}
 
+# d = fixedRoomItemInteraction["Bookcase"]
+# r = random.choice(list(d.keys()))
+# print(r)
+# print(d["Bad"])
 # newRoom = stoneHallway()
 # newRoom.getName
 # print(newRoom.baseDescription)
