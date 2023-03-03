@@ -18,29 +18,29 @@ class Room():
 # Total of 7 stone rooms, when the 7 rooms are done, print something
 # Remove a room description everytime it fires. 
 class stoneHallway(Room):
+    # for dictionaries, choose a random key, and then a random item in that key's list
     def __init__(self):
         self.baseDescription = random.choice(stoneRoomFacesDescriptions)
-        self.elemental = random.choice(elemental)
-        self.elementalDescription = random.choice(elementalDescription[self.elemental])
-        self.fixedItem = random.choice(fixedRoomItems)
-        self.fixedItemDescription = random.choice(fixedRoomItemsDescriptions[self.fixedItem])
+        self.elementalName = random.choice(list(elementalDescription.keys()))
+        self.elementalDescription = random.choice(elementalDescription[self.elementalName])
+        self.fixedItemName = random.choice(list(fixedRoomItems.keys()))
+        self.fixedItemDescription = random.choice(fixedRoomItems[self.fixedItemName])
         self.fate = "Nothing"
-
 
     def getDescription(self):
         stoneRoomFacesDescriptions.remove(self.baseDescription)
         return self.baseDescription
 
     def describeElementalEffects(self):
-        elementalDescription.get(self.elemental).remove(self.elementalDescription)
+        elementalDescription.get(self.elementalName).remove(self.elementalDescription)
         return self.elementalDescription
 
     def descriptionOfFixedItems(self):
         return self.fixedItemDescription
 
-    def searchFixedItem(self):
+    def searchFixedItem(self):  # will roll luck
         self.rollLuck()
-        d = fixedRoomItemInteraction[self.fixedItem]
+        d = fixedRoomItemInteraction[self.fixedItemName]
         foundThing = random.choice(d[self.fate])
         return foundThing
 
@@ -51,8 +51,6 @@ class stoneHallway(Room):
 
 
 # DESCRIPTIONS OF ROOM AND THEIR PROPERTIES AND ITEMS
-# Okay, maybe I can pop the items of the list so the user won't have any repeats during a game...
-
 stoneRoomFacesDescriptions = [
     "The stone walls are smooth to the touch",
     "A spider web is caught within your fingers",
@@ -62,7 +60,7 @@ stoneRoomFacesDescriptions = [
     "Moss and lichen cling to the now slimy walls"
     ]
 
-elemental = ["Water", "Torch", "Wind"]
+# A list of potential elemental effects, and their random choice descriptions.
 elementalDescription = {
     "Water": [
         "Water drips from the celing",
@@ -79,14 +77,7 @@ elementalDescription = {
         ]
     }
 
-fixedRoomItems = [
-    "Bookcase",
-    "Alter",
-    "Shrine",
-    "Chest"
-    ]
-
-fixedRoomItemsDescriptions = {
+fixedRoomItems = {
     "Bookcase":[
         "A broken bookcase sags in the corner",
         "A moldy bookcase sits on the wall that houses several slimy books",
@@ -135,8 +126,8 @@ fixedRoomItemInteraction = {
 # r = random.choice(list(d.keys()))
 # print(r)
 # print(d["Bad"])
-# newRoom = stoneHallway()
-# newRoom.getName
-# print(newRoom.baseDescription)
-# print(newRoom.elementalDescription)
-# print(newRoom.fixedItemDescription)
+newRoom = stoneHallway()
+
+print(newRoom.baseDescription)
+print(newRoom.elementalDescription)
+print(newRoom.fixedItemDescription)

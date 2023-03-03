@@ -26,16 +26,27 @@ def getRandomAmountOfMonsters():
 
 
 def main():
+    print("\n\n\n\n")
+    print("Welcome To The")
+    print("""
+▓█████▄  █    ██  ███▄    █   ▄████ ▓█████  ▒█████   ███▄    █    
+▒██▀ ██▌ ██  ▓██▒ ██ ▀█   █  ██▒ ▀█▒▓█   ▀ ▒██▒  ██▒ ██ ▀█   █    
+░██   █▌▓██  ▒██░▓██  ▀█ ██▒▒██░▄▄▄░▒███   ▒██░  ██▒▓██  ▀█ ██▒   
+░▓█▄   ▌▓▓█  ░██░▓██▒  ▐▌██▒░▓█  ██▓▒▓█  ▄ ▒██   ██░▓██▒  ▐▌██▒   
+░▒████▓ ▒▒█████▓ ▒██░   ▓██░░▒▓███▀▒░▒████▒░ ████▓▒░▒██░   ▓██░   
+ ▒▒▓  ▒ ░▒▓▒ ▒ ▒ ░ ▒░   ▒ ▒  ░▒   ▒ ░░ ▒░ ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒    
+ ░ ▒  ▒ ░░▒░ ░ ░ ░ ░░   ░ ▒░  ░   ░  ░ ░  ░  ░ ▒ ▒░ ░ ░░   ░ ▒░   
+ ░ ░  ░  ░░░ ░ ░    ░   ░ ░ ░ ░   ░    ░   ░ ░ ░ ▒     ░   ░ ░    
+   ░       ░              ░       ░    ░  ░    ░ ░           ░    
+ ░                                                                """)
     print("-----------------------")
-    print("Welcome to the Dungeon.")
+    pause = input("Press Enter to Continue...\n\n")
     
     shortSword = Util.Weapon("Short Sword", Util.Dice(6))
     Inventory = {shortSword.getName(): [shortSword, 1]}
 
 
     monsterManual = MonsterManual()
-    goblin_0 = Creature("red goblin", monsterManual.getGoblinStats(), Inventory, shortSword)
-    goblin_1 = Creature("blue goblin", monsterManual.getGoblinStats(), Inventory, shortSword)
     hero = Creature("Claude", monsterManual.getPlayerStats(), Inventory, shortSword)
 
     # Inventory manegement
@@ -51,11 +62,11 @@ def main():
 
         combatPhase = CombatPhase(hero, listOfMonsters)
         combatPhase.run()
-        pause = input("Press Enter to Continue...")
+        pause = input("Press Enter to Continue...\n\n")
 
         explorationPhase = ExplorationPhase(hero)
         explorationPhase.run()
-        pause = input("Press Enter to Continue...")
+        pause = input("Press Enter to Continue...\n\n")
 
 
 if __name__ == "__main__":

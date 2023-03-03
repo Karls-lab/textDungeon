@@ -3,13 +3,9 @@ Okay, so let's add items to the room
 Main Game LOOP
     Enter the new room
     Give discription of the room
-    Monsters?
+    Monsters
     Resolve conflict
     Explore room
-
-TODO:
-    When the user explores a room, delete that exploration description
-    so there isn't a ton of repeats. 
 
 
 
