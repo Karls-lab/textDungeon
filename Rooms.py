@@ -5,22 +5,71 @@
 # basic items inside the room
 
 import random
+import json
 
 class Room():
     def __init__(self):
         self.name = "name of room"
         self.items = []
+        self.position = None
+        self.visited = False
+        self.north = None
+        self.south = None
+        self.east = None
+        self.west = None
     
     def getName(self):
         return self.name
+    
+    def get_position(self):
+        return self.position
+    
+    def go_north(self):
+        return self.north
+
+    def go_south(self):
+        return self.south
+    
+    def go_east(self):
+        return self.east
+    
+    def go_west(self):
+        return self.west
+    
+    def get_possible_movement(self):
+        possible_moves = []
+        if self.north != None:
+            possible_moves.append("North")
+        if self.south != None:
+            possible_moves.append("South")
+        if self.east != None:
+            possible_moves.append("East")
+        if self.west != None:
+            possible_moves.append("West")
+        return possible_moves
 
 
 # Total of 7 stone rooms, when the 7 rooms are done, print something
 # Remove a room description everytime it fires. 
 class stoneHallway(Room):
-    # for dictionaries, choose a random key, and then a random item in that key's list
     def __init__(self):
-        self.baseDescription = random.choice(stoneRoomFacesDescriptions)
+        super().__init__()
+        # for dictionaries, choose a random key, and then a random item in that key's list
+        self.baseDescription = None
+        self.elementalName = None
+        self.elementalDescription = None
+        self.fixedItemName = None
+        self.fixedItemDescription = None
+        self.fate = None
+        self.generate()
+        
+    def generate(self):
+        with open("./rooms/stoneRoom/description.json", "r") as f:
+            data = json.load(f)
+            random_selection = str(random.randint(0, len(data["stoneRoomFacesDescriptions"]) - 1))
+            self.baseDescription = data["stoneRoomFacesDescriptions"][random_selection]
+
+        #self.baseDescription = random.choice(stoneRoomFacesDescriptions)
         self.elementalName = random.choice(list(elementalDescription.keys()))
         self.elementalDescription = random.choice(elementalDescription[self.elementalName])
         self.fixedItemName = random.choice(list(fixedRoomItems.keys()))
@@ -28,11 +77,9 @@ class stoneHallway(Room):
         self.fate = "Nothing"
 
     def getDescription(self):
-        stoneRoomFacesDescriptions.remove(self.baseDescription)
         return self.baseDescription
 
     def describeElementalEffects(self):
-        elementalDescription.get(self.elementalName).remove(self.elementalDescription)
         return self.elementalDescription
 
     def descriptionOfFixedItems(self):
@@ -126,8 +173,8 @@ fixedRoomItemInteraction = {
 # r = random.choice(list(d.keys()))
 # print(r)
 # print(d["Bad"])
-newRoom = stoneHallway()
+# newRoom = stoneHallway()
 
-print(newRoom.baseDescription)
-print(newRoom.elementalDescription)
-print(newRoom.fixedItemDescription)
+# print(newRoom.baseDescription)
+# print(newRoom.elementalDescription)
+# print(newRoom.fixedItemDescription)

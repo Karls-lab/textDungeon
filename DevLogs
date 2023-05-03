@@ -8,6 +8,17 @@ Main Game LOOP
     Explore room
 
 
+Refactoring Goals:
+    Move the ASCII Art into separate txt files and folders
+    Move the room descriptions into separete txt files
+
+
+TODO:
+
+    Map Logic:
+        When moving south, in order to move back up north, it says move south again.
+
+
 
 Okay, so how about the adventurer can only explore one thing in a room?
 So there's one chance to find an item. 
@@ -21,3 +32,11 @@ Fixed Items and their advantages/disadvanges:
 Elemental Effects and their advantages/disadvanges:
  -Water: To drink
  -Fire: To see || Warmth
+
+
+Map Layout:
+    coordinates = (x, y)
+    N = y + 1
+    S = y - 1
+    W = x - 1
+    E = x + 1
